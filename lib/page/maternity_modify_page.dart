@@ -483,14 +483,6 @@ class MaternityModifyPageState extends State<MaternityModifyPage>{
                       tooltip: 'pick Iamge',
                       onPressed: () async{
 
-                        ImagePicker picker = ImagePicker();
-                        // galleryurl = (await picker.getImage(source: ImageSource.gallery)) as String;
-                        //galleryurl = (await ImagePicker().pickImage(source: ImageSource.gallery)) as String;
-                        galleryurl = await getImage(ImageSource.gallery);
-                        // galleryurl = (await ImagePicker.pickImage(source: ImageSource.gallery)) as String;
-                        // print("갤러리 누름");
-                        print(galleryurl);
-                        // getImage(ImageSource.gallery);
 
 
                       },

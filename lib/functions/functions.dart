@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -58,10 +57,10 @@ pregnant_getocr() async {
 
 //선택한 기록 불러오기
 //사용자 아이디, 모돈 번호를 보내고 그 값을 받아옴
-pregnant_selectrow(int num) async{
+pregnant_selectrow(String seq) async{
   final api ='http://211.107.210.141:3000/api/ocr_pregnantSelectedRow';
   final data = {
-    "ocr_seq": num, //pk
+    "ocr_seq": seq, //pk
   };
   final dio = Dio();
   Response response;
@@ -75,11 +74,10 @@ pregnant_selectrow(int num) async{
 }
 
 //수정 후 서버 전송
-pregnant_update(String? ocr_seq, String? sow_no,String? sow_birth, String? sow_buy, String? sow_estrus, String? sow_cross, String? boar_fir, String? boar_sec,
+pregnant_update( String? sow_no,String? sow_birth, String? sow_buy, String? sow_estrus, String? sow_cross, String? boar_fir, String? boar_sec,
 String? checkdate, String? expectdate, String? vaccine1, String? vaccine2, String? vaccine3, String? vaccine4, String? memo) async {
 final api ='http://172.17.53.63:3000/api/ocrpregnatInsert';
 final data = {
-  "ocr_seq": ocr_seq,
   "sow_no": sow_no,
   "sow_birth": sow_birth,
   "sow_buy":sow_buy,

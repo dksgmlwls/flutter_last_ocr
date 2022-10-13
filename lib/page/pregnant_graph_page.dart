@@ -24,7 +24,7 @@ class PregnantGraphPageState extends State<PregnantGraphPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            title: Text("임신사 Graph Page")
+            title: Text("임신사 그래프")
         ),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,

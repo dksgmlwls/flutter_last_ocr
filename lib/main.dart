@@ -28,8 +28,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-  var pregnants = <Ocr_pregnant>[].obs;
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -72,10 +70,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       OutlinedButton(
                           onPressed: (){
-                            //화면전환
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => PregnantListPage()));
                             //서버로부터 값 받아오기
-                            pregnant_getocr();
+                           // List<String> ocr_seq_sow_no = <String>[];
+
+                            //ocr_seq_sow_no = pregnant_getocr();
+                            //화면전환
+                            // Navigator.push(context, MaterialPageRoute(builder: (context) => PregnantListPage(ocr_seq_sow_no)));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => PregnantListPage()));
 
                           },
                           child: const Text('기록')

@@ -28,7 +28,7 @@ class MaternitytListPageState extends State<MaternitytListPage> {
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-          appBar: AppBar(title: Text('임신사 기록보기')),
+          appBar: AppBar(title: Text('분만사 기록보기')),
           body: ListView.separated(
             padding: const EdgeInsets.all(8),
             itemCount: ocr_seq.length,

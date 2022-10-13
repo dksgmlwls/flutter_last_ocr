@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,17 +12,22 @@ import 'package:last_ocr/page/pregnant_modify_page.dart';
 import 'package:path/path.dart';
 
 class PregnantListPage extends StatefulWidget {
+
+ // PregnantListPage(List list_ocr_seq);
+
   @override
   PregnantListPageState createState() => PregnantListPageState();
 }
 
 class PregnantListPageState extends State<PregnantListPage> {
 
-  final List<String> ocr_seq = <String>['A', 'B', 'C'];
-  final List<String> sow_no = <String>['100', '500', '100'];
+  late List<String> ocr_seq = <String>['A', 'B', 'C'];
+  late List<String> sow_no = <String>['100', '500', '100'];
 
   @override
   Widget build(BuildContext context) {
+
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -45,8 +52,12 @@ class PregnantListPageState extends State<PregnantListPage> {
                             subtitle: Text(sow_no[index]),
                             trailing: Icon(Icons.keyboard_arrow_right),
                             onTap: (){
+
+                              print(ocr_seq[index].toString());
+                              //pregnant_selectrow(ocr_seq[index].toString());
                               //화면전환코드
                               Navigator.push(context, MaterialPageRoute(builder: (context) => PregnantModifyPage()));
+
                             },
                           ) ,
                         Container(

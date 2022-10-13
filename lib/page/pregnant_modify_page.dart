@@ -111,12 +111,12 @@ class PregnantModifyPageState extends State<PregnantModifyPage>{
 
     final temp = await submit_uploadimg_front(image);
     print("aaaa");
-    print(temp);
+    //print(temp);
 
     setState((){
       _image = File(image!.path); // 가져온 이미지를 _image에 저장
     });
-    return temp;
+   // return temp;
   }
 
   final sowID1_Controller = TextEditingController();
@@ -514,15 +514,6 @@ class PregnantModifyPageState extends State<PregnantModifyPage>{
                       tooltip: 'pick Iamge',
                       onPressed: () async{
 
-                        ImagePicker picker = ImagePicker();
-                        // galleryurl = (await picker.getImage(source: ImageSource.gallery)) as String;
-                        //galleryurl = (await ImagePicker().pickImage(source: ImageSource.gallery)) as String;
-                        galleryurl = await getImage(ImageSource.gallery);
-                        // galleryurl = (await ImagePicker.pickImage(source: ImageSource.gallery)) as String;
-                        // print("갤러리 누름");
-                        print(galleryurl);
-                        // getImage(ImageSource.gallery);
-
 
                       },
                     ),
@@ -551,7 +542,7 @@ class PregnantModifyPageState extends State<PregnantModifyPage>{
                         memo = memo_Controller.text;
 
 
-                        pregnant_update(ocr_seq, sow_no, sow_birth, sow_buy, sow_estrus, sow_cross, boar_fir, boar_sec, checkdate, expectdate, vaccine1, vaccine2, vaccine3, vaccine4, memo);
+                        pregnant_update(sow_no, sow_birth, sow_buy, sow_estrus, sow_cross, boar_fir, boar_sec, checkdate, expectdate, vaccine1, vaccine2, vaccine3, vaccine4, memo);
 
                       },
                     ),

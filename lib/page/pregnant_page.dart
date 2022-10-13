@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:last_ocr/functions/functions.dart';
 import 'package:last_ocr/overlay/camera_overlay_pregnant.dart';
-
 
 class PregnantPage extends StatefulWidget{
   static const routeName = '/OcrPregnantPage';
@@ -156,6 +156,7 @@ class PregnantPageState extends State<PregnantPage>{
   final vaccine3_sec_Controller = TextEditingController();
   final vaccine4_fir_Controller = TextEditingController();
   final vaccine4_sec_Controller = TextEditingController();
+
   final memo_Controller = TextEditingController();
   final pxController = TextEditingController();
 
@@ -163,6 +164,9 @@ class PregnantPageState extends State<PregnantPage>{
 
   @override
   Widget build(BuildContext context) {
+
+
+
     return Scaffold(
         appBar: AppBar(
           title: Text("임신사"),
@@ -543,8 +547,8 @@ class PregnantPageState extends State<PregnantPage>{
                       tooltip: 'pick Iamge',
                       onPressed: () async{
                         //_showToast(context);
-                        sowID = sowID1_Controller.text + "," + sowID2_Controller.text;
-                        ocr_seq = sowID1_Controller.text + "," + sowID2_Controller.text;
+                       // sowID = sowID1_Controller.text + "," + sowID2_Controller.text;
+                       // ocr_seq = sowID1_Controller.text + "," + sowID2_Controller.text;
                         sow_no = sowID1_Controller.text + "," + sowID2_Controller.text;
                         sow_birth = birth_year_Controller.text +"," + birth_month_Controller.text + "," + birth_day_Controller.text;
                         sow_buy = adoption_year_Controller.text + "," +  adoption_month_Controller.text + "," + adoption_day_Controller.text;
@@ -562,7 +566,7 @@ class PregnantPageState extends State<PregnantPage>{
                         memo = memo_Controller.text;
 
 
-                        sendData(ocr_seq, sow_no, sow_birth, sow_buy, sow_estrus, sow_cross, boar_fir, boar_sec, checkdate, expectdate, vaccine1, vaccine2, vaccine3, vaccine4, memo);
+                        pregnant_update(sow_no, sow_birth, sow_buy, sow_estrus, sow_cross, boar_fir, boar_sec, checkdate, expectdate, vaccine1, vaccine2, vaccine3, vaccine4, memo);
 
                       },
                     ),
