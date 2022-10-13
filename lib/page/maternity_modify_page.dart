@@ -5,21 +5,22 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:last_ocr/functions/functions.dart';
 import 'package:last_ocr/overlay/camera_overlay_maternity.dart';
 
 
-class MaternityPage extends StatefulWidget{
+class MaternityModifyPage extends StatefulWidget{
   static const routeName = '/OcrPregnantPage';
 
-  const MaternityPage({Key? key, this.title}) : super(key: key);
+  const MaternityModifyPage({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  MaternityPageState createState() => MaternityPageState();
+  MaternityModifyPageState createState() => MaternityModifyPageState();
 }
 
-class MaternityPageState extends State<MaternityPage>{
+class MaternityModifyPageState extends State<MaternityModifyPage>{
 
   File? _image;
   final picker = ImagePicker();
@@ -134,12 +135,11 @@ class MaternityPageState extends State<MaternityPage>{
   final memo_Controller = TextEditingController();
 
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("분만사"),
+          title: Text("분만사 수정하기"),
         ),
         body: SingleChildScrollView(
 
@@ -478,20 +478,8 @@ class MaternityPageState extends State<MaternityPage>{
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     FloatingActionButton(
-                      heroTag: 'camera',
-                      child: Icon(Icons.add_a_photo),
-                      tooltip: 'pick Image',
-                      onPressed: ()  {
-
-                        // getImage(ImageSource.camera);
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => CameraOverlayMaternity()));
-                        // print("open camera");
-
-                      },
-                    ),
-                    FloatingActionButton(
-                      heroTag: 'gallery_button',
-                      child: Icon(Icons.wallpaper),
+                      heroTag: '수정',
+                      child: Icon(Icons.border_color_sharp),
                       tooltip: 'pick Iamge',
                       onPressed: () async{
 
@@ -535,7 +523,7 @@ class MaternityPageState extends State<MaternityPage>{
                         memo = memo_Controller.text;
 
 
-                        sendData(sow_no, sow_birth, sow_buy, sow_expectdate, sow_givebirth, sow_totalbaby, sow_feedbaby,
+                        maternity_update(sow_no, sow_birth, sow_buy, sow_expectdate, sow_givebirth, sow_totalbaby, sow_feedbaby,
                             sow_babyweight, sow_sevrerdate, sow_sevrerqty, sow_sevrerweight,  vaccine1,  vaccine2,
                             vaccine3,  vaccine4,  memo);
 
@@ -549,91 +537,3 @@ class MaternityPageState extends State<MaternityPage>{
 
   }
 }
-
-sendData(String? sow_no, String? sow_birth, String? sow_buy, String? sow_expectdate, String? sow_givebirth, String? sow_totalbaby, String? sow_feedbaby,
-    String? sow_babyweight, String? sow_sevrerdate, String? sow_sevrerqty, String? sow_sevrerweight,  String? vaccine1, String? vaccine2,
-    String? vaccine3, String? vaccine4, String? memo) async {
-  final api ='http://211.107.210.141:3000/api/ocrmaternityUpdate';
-  final data = {
-    "sow_no": sow_no,
-    "sow_birth": sow_birth,
-    "sow_buy":sow_buy,
-    "sow_expectdate":sow_expectdate,
-    "sow_givebirth":sow_givebirth,
-    "sow_totalbaby":sow_totalbaby,
-    "sow_feedbaby":sow_feedbaby,
-    "sow_babyweight":sow_babyweight,
-    "sow_sevrerdate":sow_sevrerdate, //이유두수
-    "sow_sevrerqty":sow_sevrerqty, //이유날
-    "sow_sevrerweight":sow_sevrerweight, //이유체중
-    "vaccine1": vaccine1,
-    "vaccine2": vaccine2,
-    "vaccine3": vaccine3,
-    "vaccine4":vaccine4,
-    // "ocr_imgpath":'14',
-    "memo": memo,};
-  final dio = Dio();
-  Response response;
-  response = await dio.post(api,data: data);
-  if(response.statusCode == 200){
-    //resultToast('Ocr 분만사 update success... \n\n');
-  }
-}
-
-// class EmployeeDataSource extends DataGridSource {
-//    EmployeeDataSource(List<Employee> employees) {
-//    buildDataGridRow(employees);
-//    }
-//
-//    void buildDataGridRow(List<Employee> employeeData) {
-//    dataGridRow = employeeData.map<DataGridRow>((employee) {
-//    return DataGridRow(cells: [
-//    DataGridCell<int>(columnName: 'id', value: employee.id),
-//    DataGridCell<String>(columnName: 'name', value: employee.name),
-//    DataGridCell<String>(
-//    columnName: 'designation', value: employee.designation),
-//    const DataGridCell<Widget>(columnName: 'button', value: null),
-//    ]);
-//    }).toList();
-//    }
-//
-//    List<DataGridRow> dataGridRow = <DataGridRow>[];
-//
-//    @override
-//    List<DataGridRow> get rows => dataGridRow.isEmpty ? [] : dataGridRow;
-//
-//    @override
-//    DataGridRowAdapter? buildRow(DataGridRow row) {
-//    return DataGridRowAdapter(
-//    cells: row.getCells().map<Widget>((dataGridCell) {
-//    return Container(
-//    alignment: Alignment.center,
-//    child: dataGridCell.columnName == 'button'
-//    ? LayoutBuilder(
-//    builder: (BuildContext context, BoxConstraints constraints) {
-//   return ElevatedButton(
-//    onPressed: () {
-//    showDialog(
-//    context: context,
-//   builder: (context) => AlertDialog(
-//   content: SizedBox(
-//   height: 100,
-//   child: Column(
-//    mainAxisAlignment:
-//    MainAxisAlignment.spaceBetween,
-//    children: [
-//    Text(
-//    'Employee ID: ${row.getCells()[0].value.toString()}'),
-//    Text(
-//    'Employee Name: ${row.getCells()[1].value.toString()}'),
-//    Text(
-//    'Employee Designation: ${row.getCells()[2].value.toString()}'),
-//    ],
-//    ))));
-//    },
-//    child: const Text('Details'));
-//    })
-//    : Text(dataGridCell.value.toString()));
-//    }).toList());
-//    }
-// }

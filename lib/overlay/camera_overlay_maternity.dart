@@ -1,22 +1,26 @@
 import 'dart:io';
 
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_camera_overlay/flutter_camera_overlay.dart';
 import 'package:flutter_camera_overlay/model.dart';
-import 'package:http_parser/http_parser.dart';
-// import 'package:ocr/pages/navigations/camera_page.dart';
-// import '../pages/navigations/camera_page.dart';
-
-import 'package:image_picker/image_picker.dart';
-import 'package:image_cropper/image_cropper.dart';
+import 'package:flutter_camera_overlay/overlay_shape.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
+import 'package:http_parser/http_parser.dart';
+import 'package:image_cropper/image_cropper.dart';
+// import 'package:flutter/src/widgets/image.dart';
 
+
+// import 'dart:io';
+// import 'package:image/image.dart' as img;
+
+typedef XFileCallback = void Function(XFile file);
 
 late List<String> array = List.filled(35, "",growable: true);
 late List<String> array_graph = List.filled(8, "", growable: true);
-
 
 receiveresult(){
   print(array);
@@ -27,21 +31,21 @@ receiveresult(){
 main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
-    const ExampleCameraOverlay(),
+    const CameraOverlayMaternity(),
   );
 }
 
-class ExampleCameraOverlay extends StatefulWidget {
+class CameraOverlayMaternity extends StatefulWidget {
 
   static const routeName = '/graph-page';
 
-  const ExampleCameraOverlay({Key? key}) : super(key: key);
+  const CameraOverlayMaternity({Key? key}) : super(key: key);
 
   @override
-  _ExampleCameraOverlayState createState() => _ExampleCameraOverlayState();
+  CameraOverlayMaternityState createState() => CameraOverlayMaternityState();
 }
 
-class _ExampleCameraOverlayState extends State<ExampleCameraOverlay> {
+class CameraOverlayMaternityState extends State<CameraOverlayMaternity> {
   OverlayFormat format = OverlayFormat.cardID1;
   int tab = 0;
 
@@ -86,40 +90,6 @@ class _ExampleCameraOverlayState extends State<ExampleCameraOverlay> {
 
     return MaterialApp(
         home: Scaffold(
-          // bottomNavigationBar: BottomNavigationBar(
-          //   currentIndex: tab,
-          //   onTap: (value) {
-          //     setState(() {
-          //       tab = value;
-          //     });
-          //     switch (value) {
-          //       case (0):
-          //         setState(() {
-          //           format = OverlayFormat.cardID1;
-          //         });
-          //         break;
-          //       // case (1):
-          //       //   setState(() {
-          //       //     format = OverlayFormat.cardID3;
-          //       //   });
-          //       //   break;
-          //       // case (2):
-          //       //   setState(() {
-          //       //     format = OverlayFormat.simID000;
-          //       //   });
-          //       //   break;
-          //     }
-          //   },
-          //   items: const [
-          //     BottomNavigationBarItem(
-          //       icon: Icon(Icons.credit_card),
-          //       label: 'Bankcard',
-          //     ),
-          //     // BottomNavigationBarItem(
-          //     //     icon: Icon(Icons.contact_mail), label: 'US ID'),
-          //     // BottomNavigationBarItem(icon: Icon(Icons.sim_card), label: 'Sim'),
-          //   ],
-          // ),
           backgroundColor: Colors.white,
           body: FutureBuilder<List<CameraDescription>?>(
             future: availableCameras(),
@@ -163,7 +133,7 @@ class _ExampleCameraOverlayState extends State<ExampleCameraOverlay> {
 
                                     ImageProperties properties = await FlutterNativeImage.getImageProperties(file.path);
 
-                                    final filename = await submit_uploadimg_front(file);
+                                    final filename = await submit_uploadimg_back(file);
 
                                     //서버로 사진 전송
                                     final api ='http://211.107.210.141:3000/api/ocrpregnatInsert';
@@ -178,7 +148,7 @@ class _ExampleCameraOverlayState extends State<ExampleCameraOverlay> {
 
                                     Navigator.of(context).popUntil((route) => route.isFirst);
                                     await Navigator.push(context,MaterialPageRoute(builder: (context) =>
-                                        ExampleCameraOverlay()),
+                                        CameraOverlayMaternity()),
                                     );
                                   },
                                   child: Container(
@@ -189,31 +159,6 @@ class _ExampleCameraOverlayState extends State<ExampleCameraOverlay> {
                                 ),
                               ],
                             ),
-                            // actions: [
-                            //   OutlinedButton(
-                            //     // onPressed: () => Navigator.of(context).pop(),
-                            //     //
-                            //     //     Navigator.pop(context, file.path);
-                            //       onPressed: () async {
-                            //         final croppedfile = await cropImage(file.path);
-                            //         final filename = await submit_uploadimg_front(croppedfile); // 서버에 저장된 이름을 반환해줌 (이름을 알아야 url로 들어가니까)
-                            //         print(file.path);
-                            //         // final filename = await submit_uploadimg(file.path);
-                            //         // print(filename);
-                            //
-                            //
-                            //
-                            //
-                            //         Navigator.of(context).popUntil((route) => route.isFirst);
-                            //         await Navigator.push(context,MaterialPageRoute(builder: (context) =>
-                            //             ExampleCameraOverlay()),
-                            //         );
-                            //
-                            //
-                            //       },
-                            //       child: const Icon(Icons.edit))
-                            //
-                            // ],
                             content: SizedBox( // 뒤로가기 버튼 만든 그 페이지 사이즈박스
                                 width: double.infinity,
                                 child: AspectRatio(
@@ -241,7 +186,7 @@ class _ExampleCameraOverlayState extends State<ExampleCameraOverlay> {
                 return const Align(
                     alignment: Alignment.center,
                     child: Text(
-                      'ㅁㄴㅇㄹㅁㄴㄹㅁㄴㅇ',
+                      '분만사 카메라예용',
                       style: TextStyle(color: Colors.black),
                     ));
               }
@@ -251,11 +196,12 @@ class _ExampleCameraOverlayState extends State<ExampleCameraOverlay> {
   }
 }
 
-submit_uploadimg_front(dynamic file) async {
+
+submit_uploadimg_back(dynamic file) async {
   String filename = "no";
   try {
-    //print("임신사 이미지 전송 함");
-    Response res = await uploadimg_front(file.path);
+    // print("분만사 이미지 전송 함");
+    Response res = await uploading_back(file.path);
 
     switch(res.statusCode){
       case 200:
@@ -264,7 +210,7 @@ submit_uploadimg_front(dynamic file) async {
         array = jsonbody['result'];
         print("array is ?");
         print(array);
-        print("임신사 이미지 전송 함");
+        print("분만사 이미지 전송 함");
         break;
       case 201:
         break;
@@ -280,7 +226,7 @@ submit_uploadimg_front(dynamic file) async {
   }
 }
 
-uploadimg_front(String imagePath) async {
+uploading_back(String imagePath) async {
   Dio dio = new Dio();
   try {
     dio.options.contentType = 'multipart/form-data';
@@ -293,7 +239,7 @@ uploadimg_front(String imagePath) async {
           filename: fileName, contentType:MediaType("image","jpg")),
     });
     Response response = await dio.post(
-        'http://211.107.210.141:4000/ocrs/uploadimg/front/',
+        'http://211.107.210.141:3001/ocrs/uploadimg/back',
         data:_formData
     );
     print(response);
@@ -307,3 +253,4 @@ uploadimg_front(String imagePath) async {
   }
   // return 0;
 }
+
