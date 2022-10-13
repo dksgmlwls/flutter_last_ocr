@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:last_ocr/functions/functions.dart';
 import 'package:last_ocr/overlay/camera_overlay_maternity.dart';
 
 
@@ -535,7 +536,7 @@ class MaternityPageState extends State<MaternityPage>{
                         memo = memo_Controller.text;
 
 
-                        sendData(sow_no, sow_birth, sow_buy, sow_expectdate, sow_givebirth, sow_totalbaby, sow_feedbaby,
+                        maternity_insert(sow_no, sow_birth, sow_buy, sow_expectdate, sow_givebirth, sow_totalbaby, sow_feedbaby,
                             sow_babyweight, sow_sevrerdate, sow_sevrerqty, sow_sevrerweight,  vaccine1,  vaccine2,
                             vaccine3,  vaccine4,  memo);
 

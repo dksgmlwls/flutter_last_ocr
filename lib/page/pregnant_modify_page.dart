@@ -109,14 +109,14 @@ class PregnantModifyPageState extends State<PregnantModifyPage>{
   Future getImage(ImageSource imageSource) async {
     final image = await picker.pickImage(source: imageSource);
 
-    final temp = await submit_uploadimg_front(image);
+    // final temp = await submit_uploadimg_front(image);
     print("aaaa");
-    //print(temp);
+    // print(temp);
 
     setState((){
       _image = File(image!.path); // 가져온 이미지를 _image에 저장
     });
-   // return temp;
+    // return temp;
   }
 
   final sowID1_Controller = TextEditingController();
@@ -164,6 +164,8 @@ class PregnantModifyPageState extends State<PregnantModifyPage>{
 
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
         appBar: AppBar(
           title: Text("임신사기 수정하기"),

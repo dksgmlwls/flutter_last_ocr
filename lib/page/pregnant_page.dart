@@ -86,6 +86,18 @@ class PregnantPageState extends State<PregnantPage>{
 
   String galleryurl = '';
 
+  late String vaccine1_fir ='';
+  late String vaccine1_sec ='';
+
+  late String vaccine2_fir ='';
+  late String vaccine2_sec ='';
+
+  late String vaccine3_fir ='';
+  late String vaccine3_sec ='';
+
+  late String vaccine4_fir ='';
+  late String vaccine4_sec ='';
+
 
 
   Widget showImage() {
@@ -108,14 +120,14 @@ class PregnantPageState extends State<PregnantPage>{
   Future getImage(ImageSource imageSource) async {
     final image = await picker.pickImage(source: imageSource);
 
-    final temp = await submit_uploadimg_front(image);
+    // final temp = await submit_uploadimg_front(image);
     print("aaaa");
-    print(temp);
+    // print(temp);
 
     setState((){
       _image = File(image!.path); // 가져온 이미지를 _image에 저장
     });
-    return temp;
+    // return temp;
   }
 
   final sowID1_Controller = TextEditingController();
@@ -166,6 +178,50 @@ class PregnantPageState extends State<PregnantPage>{
   Widget build(BuildContext context) {
 
 
+    array = receiveresult();
+    sowID1 = array[0];
+    sowID2 = array[1];
+
+    birth_year = array[2];
+    birth_month = array[3];
+    birth_day = array[4];
+
+    adoption_year = array[5];
+    adoption_month = array[6];
+    adoption_day = array[7];
+
+    hormone_year = array[8];
+    hormone_month = array[9];
+    hormone_day = array[10];
+
+    mate_month = array[11];
+    mate_day = array[12];
+
+    boar1ID1 = array[13];
+    boar1ID2 = array[14];
+
+    boar2ID1 = array[15];
+    boar2ID2 = array[16];
+
+    check_month = array[17];
+    check_day = array[18];
+
+    expect_month = array[19];
+    expect_day = array[20];
+
+    vaccine1_fir = array[21];
+    vaccine1_sec = array[22];
+
+    vaccine2_fir = array[23];
+    vaccine2_sec = array[24];
+
+    vaccine3_fir = array[25];
+    vaccine3_sec = array[26];
+
+    vaccine4_fir = array[27];
+    vaccine4_sec = array[28];
+
+    memo = array[29];
 
     return Scaffold(
         appBar: AppBar(
@@ -566,7 +622,7 @@ class PregnantPageState extends State<PregnantPage>{
                         memo = memo_Controller.text;
 
 
-                        pregnant_update(sow_no, sow_birth, sow_buy, sow_estrus, sow_cross, boar_fir, boar_sec, checkdate, expectdate, vaccine1, vaccine2, vaccine3, vaccine4, memo);
+                        pregnant_insert(sow_no, sow_birth, sow_buy, sow_estrus, sow_cross, boar_fir, boar_sec, checkdate, expectdate, vaccine1, vaccine2, vaccine3, vaccine4, memo);
 
                       },
                     ),
@@ -578,93 +634,3 @@ class PregnantPageState extends State<PregnantPage>{
 
   }
 }
-
-sendData(String? ocr_seq, String? sow_no,String? sow_birth, String? sow_buy, String? sow_estrus, String? sow_cross, String? boar_fir, String? boar_sec,
-    String? checkdate, String? expectdate, String? vaccine1, String? vaccine2, String? vaccine3, String? vaccine4, String? memo) async {
-  final api ='http://172.17.53.63:3000/api/ocrpregnatInsert';
-  final data = {
-    "ocr_seq": ocr_seq,
-    "sow_no": sow_no,
-    "sow_birth": sow_birth,
-    "sow_buy":sow_buy,
-    "sow_estrus":sow_estrus,
-    "sow_cross":sow_cross,
-    "boar_fir":boar_fir,
-    "boar_sec":boar_sec,
-    "checkdate":checkdate,
-    "expectdate":expectdate,
-    "vaccine1":vaccine1,
-    "vaccine2":vaccine2,
-    "vaccine3":vaccine3,
-    "vaccine4":vaccine4,
-    // "ocr_imgpath":'17',
-    "memo":memo,
-  };
-  final dio = Dio();
-  Response response;
-  response = await dio.post(api,data: data);
-  if(response.statusCode == 200){
-    //resultToast('Ocr 임신사 update success... \n\n');
-    print('Ocr 임신사 update success... \n\n');
-  }
-  return 0;
-}
-
-
-// class EmployeeDataSource extends DataGridSource {
-//    EmployeeDataSource(List<Employee> employees) {
-//    buildDataGridRow(employees);
-//    }
-//
-//    void buildDataGridRow(List<Employee> employeeData) {
-//    dataGridRow = employeeData.map<DataGridRow>((employee) {
-//    return DataGridRow(cells: [
-//    DataGridCell<int>(columnName: 'id', value: employee.id),
-//    DataGridCell<String>(columnName: 'name', value: employee.name),
-//    DataGridCell<String>(
-//    columnName: 'designation', value: employee.designation),
-//    const DataGridCell<Widget>(columnName: 'button', value: null),
-//    ]);
-//    }).toList();
-//    }
-//
-//    List<DataGridRow> dataGridRow = <DataGridRow>[];
-//
-//    @override
-//    List<DataGridRow> get rows => dataGridRow.isEmpty ? [] : dataGridRow;
-//
-//    @override
-//    DataGridRowAdapter? buildRow(DataGridRow row) {
-//    return DataGridRowAdapter(
-//    cells: row.getCells().map<Widget>((dataGridCell) {
-//    return Container(
-//    alignment: Alignment.center,
-//    child: dataGridCell.columnName == 'button'
-//    ? LayoutBuilder(
-//    builder: (BuildContext context, BoxConstraints constraints) {
-//   return ElevatedButton(
-//    onPressed: () {
-//    showDialog(
-//    context: context,
-//   builder: (context) => AlertDialog(
-//   content: SizedBox(
-//   height: 100,
-//   child: Column(
-//    mainAxisAlignment:
-//    MainAxisAlignment.spaceBetween,
-//    children: [
-//    Text(
-//    'Employee ID: ${row.getCells()[0].value.toString()}'),
-//    Text(
-//    'Employee Name: ${row.getCells()[1].value.toString()}'),
-//    Text(
-//    'Employee Designation: ${row.getCells()[2].value.toString()}'),
-//    ],
-//    ))));
-//    },
-//    child: const Text('Details'));
-//    })
-//    : Text(dataGridCell.value.toString()));
-//    }).toList());
-//    }
-// }
