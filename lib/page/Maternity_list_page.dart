@@ -11,17 +11,33 @@ import 'package:last_ocr/page/pregnant_modify_page.dart';
 import 'package:path/path.dart';
 
 class MaternitytListPage extends StatefulWidget {
+
+  final List listfromserver_list_mat;
+  const MaternitytListPage(this.listfromserver_list_mat);
+
   @override
   MaternitytListPageState createState() => MaternitytListPageState();
+
 }
 
 class MaternitytListPageState extends State<MaternitytListPage> {
 
-  final List<String> ocr_seq = <String>['A', 'B', 'C'];
-  final List<String> sow_no = <String>['100', '500', '100'];
+  final List<int> ocr_seq = <int>[];
+  final List<String> id = <String>[];
+  final List<String> sow_no = <String>[];
 
   @override
   Widget build(BuildContext context) {
+
+    if(widget.listfromserver_list_mat.isNotEmpty){
+      for(int i = 0 ; i < widget.listfromserver_list_mat.length ; i < 0){
+        ocr_seq.add(widget.listfromserver_list_mat[i][0]);
+        ocr_seq.add(widget.listfromserver_list_mat[i][1]);
+        sow_no.add(widget.listfromserver_list_mat[i][2]);
+
+      }
+    }
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -34,20 +50,20 @@ class MaternitytListPageState extends State<MaternitytListPage> {
             itemCount: ocr_seq.length,
             itemBuilder: (BuildContext context, int index) {
               return Container(
-                // height: 50,
-                // color: Colors.amber[sow_no[index]],
-                // child: Center(child: Text('Entry ${ocr_seq[index]}')),
+
                 child: (
                     Stack(
                       children: [
                         for(int i = 0 ; i < ocr_seq.length ; i++)
                           ListTile(
-                            title: Text(ocr_seq[index]),
-                            subtitle: Text(sow_no[index]),
+                            title: Text(id[index] + "     " + sow_no[index].toString()),
+                            //subtitle: Text(sow_no[index]),
                             trailing: Icon(Icons.keyboard_arrow_right),
                             onTap: (){
+                              //서버로 선택한 행의 아이디 값을 보냄
+                              pregnant_selectrow(ocr_seq[index]);
                               //화면전환코드
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => MaternityModifyPage()));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => MaternityModifyPage([])));
                             },
                           ) ,
                         Container(

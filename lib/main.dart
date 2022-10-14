@@ -6,7 +6,6 @@ import 'package:last_ocr/functions/functions.dart';
 import 'package:last_ocr/page/Maternity_list_page.dart';
 import 'package:last_ocr/page/Pregnant_list_page.dart';
 import 'package:last_ocr/page/maternity_graph_page.dart';
-import 'package:last_ocr/page/maternity_modify_page.dart';
 import 'package:last_ocr/page/maternity_page.dart';
 import 'package:last_ocr/page/pregnant_graph_page.dart';
 import 'package:last_ocr/page/pregnant_page.dart';
@@ -27,6 +26,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
+  var pregnants = <Ocr_pregnant>[].obs;
 
   @override
   Widget build(BuildContext context) {
@@ -64,20 +65,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       OutlinedButton(
                           onPressed: () {
                             Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => PregnantPage()));
+                                builder: (context) => PregnantPage([])));
                           },
                           child: const Text('OCR')
                       ),
                       OutlinedButton(
                           onPressed: (){
-                            //서버로부터 값 받아오기
-                           // List<String> ocr_seq_sow_no = <String>[];
-
-                            //ocr_seq_sow_no = pregnant_getocr();
                             //화면전환
-                            // Navigator.push(context, MaterialPageRoute(builder: (context) => PregnantListPage(ocr_seq_sow_no)));
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => PregnantListPage()));
-
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => PregnantListPage([])));
                           },
                           child: const Text('기록')
                       ),
@@ -102,14 +97,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       OutlinedButton(
                           onPressed: () {
                             Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => MaternityPage()));
+                                builder: (context) => MaternityPage([])));
                           },
                           child: const Text('OCR')
                       ),
                       OutlinedButton(
                           onPressed: (){
-                            Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => MaternitytListPage()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => MaternitytListPage([])));
                           },
                           child: const Text('기록')
                       ),
