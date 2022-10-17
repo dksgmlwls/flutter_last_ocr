@@ -598,21 +598,20 @@ class PregnantPageState extends State<PregnantPage>{
                         //_showToast(context);
                         // sowID = sowID1_Controller.text + sowID2_Controller.text;
                         // ocr_seq = sowID1_Controller.text + "-" + sowID2_Controller.text;
-                        sow_no = sowID1_Controller.text + "-" + sowID2_Controller.text;
-                        sow_birth = birth_year_Controller.text + "." + birth_month_Controller.text + "." + birth_day_Controller.text;
-                        sow_buy = adoption_year_Controller.text + "." +  adoption_month_Controller.text + "." +adoption_day_Controller.text;
-                        sow_estrus = hormone_year_Controller.text + "." + hormone_month_Controller.text + "." + hormone_day_Controller.text;
-                        sow_cross =  mate_month_Controller.text + "." + mate_day_Controller.text;
-                        boar_fir = boar1ID1_Controller.text + "-" + boar1ID2_Controller.text;
-                        boar_sec = boar2ID1_Controller.text + "-" + boar2ID2_Controller.text;
-                        checkdate = check_month_Controller.text + "." + check_day_Controller.text;
-                        expectdate = expect_month_Controller.text + "." + expect_day_Controller.text;
+                        sow_no = sowID1_Controller.text + sowID2_Controller.text;
+                        sow_birth = birth_year_Controller.text + birth_month_Controller.text + birth_day_Controller.text;
+                        sow_buy = adoption_year_Controller.text +  adoption_month_Controller.text +adoption_day_Controller.text;
+                        sow_estrus = hormone_year_Controller.text + hormone_month_Controller.text + hormone_day_Controller.text;
+                        sow_cross =  mate_month_Controller.text + mate_day_Controller.text;
+                        boar_fir = boar1ID1_Controller.text + boar1ID2_Controller.text;
+                        boar_sec = boar2ID1_Controller.text + boar2ID2_Controller.text;
+                        checkdate = check_month_Controller.text + check_day_Controller.text;
+                        expectdate = expect_month_Controller.text + expect_day_Controller.text;
                         vaccine1 = vaccine1_fir_Controller.text + vaccine1_sec_Controller.text;
                         vaccine2 = vaccine2_fir_Controller.text + vaccine2_sec_Controller.text;
                         vaccine3 = vaccine3_fir_Controller.text + vaccine3_sec_Controller.text;
                         vaccine4 = vaccine4_fir_Controller.text + vaccine4_sec_Controller.text;                        // "ocr_imgpath":'17',
                         memo = memo_Controller.text;
-                        print("sowID, ocr_seq");
 
                         // sendData(ocr_seq, sow_no, sow_birth, sow_buy, sow_estrus, sow_cross, boar_fir, boar_sec, checkdate, expectdate, vaccine1, vaccine2, vaccine3, vaccine4, memo);
                         await pregnant_insert();
@@ -636,7 +635,7 @@ class PregnantPageState extends State<PregnantPage>{
 pregnant_insert() async {
   final api ='http://211.107.210.141:3000/api/ocrpregnatInsert';
   final data = {
-    "ocr_seq": ocr_seq,
+    // "ocr_seq": ocr_seq,
     "sow_no": sow_no,
     "sow_birth": sow_birth,
     "sow_buy":sow_buy,
@@ -658,6 +657,6 @@ pregnant_insert() async {
   Response response;
   response = await dio.post(api,data: data);
   if(response.statusCode == 200){
-    resultToast('Ocr 임신사 insert success... \n\n');
+    resultToast('Ocr 임신사 insert success… \n\n');
   }
 }

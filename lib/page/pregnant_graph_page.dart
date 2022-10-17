@@ -62,7 +62,7 @@ class PregnantGraphPageState extends State<PregnantGraphPage> {
               ),
               Column(
                 children: [
-                  Text("총산",style:TextStyle(fontSize: 20),),
+                  Text("총산자수",style:TextStyle(fontSize: 20),),
                   AspectRatio(aspectRatio: 3/2,
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(20, 10, 30, 30),

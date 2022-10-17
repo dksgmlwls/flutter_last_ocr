@@ -9,7 +9,7 @@ import 'package:last_ocr/functions/functions.dart';
 import 'package:last_ocr/overlay/camera_overlay_pregnant.dart';
 
 late int ocr_seq;
-late int sow_no;
+late String sow_no;
 late String sow_birth;
 late String sow_buy;
 late String sow_estrus;
@@ -18,10 +18,10 @@ late String boar_fir;
 late String boar_sec;
 late String checkdate;
 late String expectdate;
-late int vaccine1;
-late int vaccine2;
-late int vaccine3;
-late int vaccine4;
+late String vaccine1;
+late String vaccine2;
+late String vaccine3;
+late String vaccine4;
 late String memo;
 late String filename;
 
@@ -142,67 +142,72 @@ class PregnantModifyPageState extends State<PregnantModifyPage>{
 
   @override
   Widget build(BuildContext context) {
+
+
     if(widget.listfromserver_pre_mo.isNotEmpty){
       if(sowID1_Controller.text.isEmpty) {
+        print("수정 페이지 : ");
         print(widget.listfromserver_pre_mo);
-        sowID1_Controller.text = widget.listfromserver_pre_mo[1][0];
-        sowID2_Controller.text = widget.listfromserver_pre_mo[1][1];
+
+
+        sowID1_Controller.text = widget.listfromserver_pre_mo[0].toString();
+        sowID2_Controller.text = widget.listfromserver_pre_mo[1].toString();
         // late String sowID3 ='';
         // late String sowID4 ='';
         // late String sowID5 ='';
 
-        birth_year_Controller.text = widget.listfromserver_pre_mo[1][2];
-        birth_month_Controller.text = widget.listfromserver_pre_mo[1][3];
-        birth_day_Controller.text = widget.listfromserver_pre_mo[1][4];
+        birth_year_Controller.text = widget.listfromserver_pre_mo[2].toString();
+        birth_month_Controller.text = widget.listfromserver_pre_mo[3].toString();
+        birth_day_Controller.text = widget.listfromserver_pre_mo[4].toString();
 
-        adoption_year_Controller.text = widget.listfromserver_pre_mo[1][5];
-        adoption_month_Controller.text = widget.listfromserver_pre_mo[1][6];
-        adoption_day_Controller.text = widget.listfromserver_pre_mo[1][7];
+        adoption_year_Controller.text = widget.listfromserver_pre_mo[5].toString();
+        adoption_month_Controller.text = widget.listfromserver_pre_mo[6].toString();
+        adoption_day_Controller.text = widget.listfromserver_pre_mo[7].toString();
 
-        hormone_year_Controller.text = widget.listfromserver_pre_mo[1][8];
-        hormone_month_Controller.text = widget.listfromserver_pre_mo[1][8];
-        hormone_day_Controller.text = widget.listfromserver_pre_mo[1][9];
+        hormone_year_Controller.text = widget.listfromserver_pre_mo[8].toString();
+        hormone_month_Controller.text = widget.listfromserver_pre_mo[8].toString();
+        hormone_day_Controller.text = widget.listfromserver_pre_mo[9].toString();
 
-        mate_month_Controller.text = widget.listfromserver_pre_mo[1][10];
-        mate_day_Controller.text = widget.listfromserver_pre_mo[1][11];
+        mate_month_Controller.text = widget.listfromserver_pre_mo[10].toString();
+        mate_day_Controller.text = widget.listfromserver_pre_mo[11].toString();
 
-        boar1ID1_Controller.text = widget.listfromserver_pre_mo[1][12];
-        boar1ID2_Controller.text = widget.listfromserver_pre_mo[1][13];
+        boar1ID1_Controller.text = widget.listfromserver_pre_mo[12].toString();
+        boar1ID2_Controller.text = widget.listfromserver_pre_mo[13].toString();
         // late String boar1ID3 ='';
         // late String boar1ID4 ='';
         // late String boar1ID5 ='';
 
-        boar2ID1_Controller.text = widget.listfromserver_pre_mo[1][14];
-        boar2ID2_Controller.text = widget.listfromserver_pre_mo[1][15];
+        boar2ID1_Controller.text = widget.listfromserver_pre_mo[14].toString();
+        boar2ID2_Controller.text = widget.listfromserver_pre_mo[0].toString();
         // late String boar2ID3 ='';
         // late String boar2ID4 ='';
         // late String boar2ID5 ='';
 
-        check_month_Controller.text = widget.listfromserver_pre_mo[1][16];
-        check_day_Controller.text = widget.listfromserver_pre_mo[1][17];
+        check_month_Controller.text = widget.listfromserver_pre_mo[1].toString();
+        check_day_Controller.text = widget.listfromserver_pre_mo[2].toString();
 
-        expect_month_Controller.text = widget.listfromserver_pre_mo[1][18];
-        expect_day_Controller.text = widget.listfromserver_pre_mo[1][19];
+        expect_month_Controller.text = widget.listfromserver_pre_mo[3].toString();
+        expect_day_Controller.text = widget.listfromserver_pre_mo[4].toString();
 
-        vaccine1_fir_Controller.text = widget.listfromserver_pre_mo[1][20];
-        vaccine1_sec_Controller.text = widget.listfromserver_pre_mo[1][21];
-        vaccine2_fir_Controller.text = widget.listfromserver_pre_mo[1][22];
-        vaccine2_sec_Controller.text = widget.listfromserver_pre_mo[1][23];
-        vaccine3_fir_Controller.text = widget.listfromserver_pre_mo[1][24];
-        vaccine3_sec_Controller.text = widget.listfromserver_pre_mo[1][25];
-        vaccine4_fir_Controller.text = widget.listfromserver_pre_mo[1][26];
-        vaccine4_sec_Controller.text = widget.listfromserver_pre_mo[1][27];
+        vaccine1_fir_Controller.text = widget.listfromserver_pre_mo[5].toString();
+        vaccine1_sec_Controller.text = widget.listfromserver_pre_mo[6].toString();
+        vaccine2_fir_Controller.text = widget.listfromserver_pre_mo[7].toString();
+        vaccine2_sec_Controller.text = widget.listfromserver_pre_mo[8].toString();
+        vaccine3_fir_Controller.text = widget.listfromserver_pre_mo[9].toString();
+        vaccine3_sec_Controller.text = widget.listfromserver_pre_mo[10].toString();
+        vaccine4_fir_Controller.text = widget.listfromserver_pre_mo[11].toString();
+        vaccine4_sec_Controller.text = widget.listfromserver_pre_mo[12].toString();
 
-        memo_Controller.text = widget.listfromserver_pre_mo[1][28];
+        memo_Controller.text = widget.listfromserver_pre_mo[13].toString();
 
-        filename = widget.listfromserver_pre_mo[0];
+        filename = widget.listfromserver_pre_mo[14].toString();
       }
     }
 
 
     return Scaffold(
         appBar: AppBar(
-          title: Text("임신사"),
+          title: Text("임신사 수정하기"),
         ),
         body: SingleChildScrollView(
 
@@ -529,8 +534,8 @@ class PregnantModifyPageState extends State<PregnantModifyPage>{
                         Text('특이사항')
                       ]),
                       Column(children:[
-                        TextField(controller: memo_Controller,
-                          decoration: const InputDecoration(hintText: " "),style: TextStyle(fontSize: 20),),
+                        // TextField(controller: memo_Controller,
+                        //   decoration: const InputDecoration(hintText: " "),style: TextStyle(fontSize: 20),),
                       ]),
                     ],),
                   ],
@@ -560,7 +565,7 @@ class PregnantModifyPageState extends State<PregnantModifyPage>{
                         //_showToast(context);
                         // sowID = sowID1_Controller.text + sowID2_Controller.text;
                         // ocr_seq = sowID1_Controller.text + sowID2_Controller.text;
-                        sow_no = int.parse(sowID1_Controller.text +  sowID2_Controller.text);
+                        sow_no = sowID1_Controller.text +  sowID1_Controller.text;
                         sow_birth = birth_year_Controller.text + birth_month_Controller.text + birth_day_Controller.text;
                         sow_buy = adoption_year_Controller.text +  adoption_month_Controller.text +adoption_day_Controller.text;
                         sow_estrus = hormone_year_Controller.text + hormone_month_Controller.text + hormone_day_Controller.text;
@@ -569,16 +574,16 @@ class PregnantModifyPageState extends State<PregnantModifyPage>{
                         boar_sec = boar2ID1_Controller.text + boar2ID2_Controller.text;
                         checkdate = check_month_Controller.text + check_day_Controller.text;
                         expectdate = expect_month_Controller.text+ expect_day_Controller.text;
-                        vaccine1 = int.parse(vaccine1_fir_Controller.text + vaccine1_sec_Controller.text);
-                        vaccine2 = int.parse(vaccine2_fir_Controller.text + vaccine2_sec_Controller.text);
-                        vaccine3 = int.parse(vaccine3_fir_Controller.text + vaccine3_sec_Controller.text);
-                        vaccine4 = int.parse(vaccine4_fir_Controller.text + vaccine4_sec_Controller.text);
-                        // "ocr_imgpath":'17',
+                        vaccine1 = vaccine1_fir_Controller.text + vaccine1_sec_Controller.text;
+                        vaccine2 = vaccine2_fir_Controller.text + vaccine2_sec_Controller.text;
+                        vaccine3 = vaccine3_fir_Controller.text + vaccine3_sec_Controller.text;
+                        vaccine4 = vaccine4_fir_Controller.text + vaccine4_sec_Controller.text;
+                        //"ocr_imgpath":'17',
                         memo = memo_Controller.text;
                         print("sowID, ocr_seq");
 
-                        await pregnant_update();
-                        //pregnant_update(sow_no, sow_birth, sow_buy, sow_estrus, sow_cross, boar_fir, boar_sec, checkdate, expectdate, vaccine1, vaccine2, vaccine3, vaccine4, memo);
+                        //await pregnant_update();
+                        pregnant_update();
 
                       },
                     ),

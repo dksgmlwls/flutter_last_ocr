@@ -6,46 +6,49 @@ import 'package:get_rx/get_rx.dart';
 import 'package:last_ocr/entities/Ocr_pregnant.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:http_parser/http_parser.dart';
-//임신사 사진전송
-// pregnant_insert(String path) async {
-//   final api ='http://211.107.210.141:3000/api/ocrpregnatInsert';
-//   final data = {
-//     "ocr_imgpath": path,
-//   };
-//   final dio = Dio();
-//   Response response;
-//   response = await dio.post(api,data: data);
-//   if(response.statusCode == 200){
-//     resultToast('Ocr 임신사 insert success... \n\n');
-//   }
-// }
 
 //전체 기록 불러오기
 pregnant_getocr() async {
   var pregnants = <Ocr_pregnant>[].obs;
+  List<int> list_ocr_seq = [];
+  List<String> list_sow_no = [];
+  List<dynamic> list_add = [];
+  int num = 0;
 
   final api ='http://211.107.210.141:3000/api/getOcr_pregnant';
   final dio = Dio();
   Response response = await dio.get(api);
   if(response.statusCode == 200) {
-
     List<dynamic> result = response.data;
     pregnants.assignAll(result.map((data) => Ocr_pregnant.fromJson(data)).toList());
     pregnants.refresh();
-    for( int i=0; i<pregnants.length; i++){
-      print(" success..."+pregnants[i].ocr_seq.toString()+" "+pregnants[i].sow_no.toString());
+    num = pregnants.length;
+    for( int i=0; i< pregnants.length; i++){
+      if(i == 0){
+        list_ocr_seq.add(pregnants.length);
+        list_sow_no.add(pregnants.length.toString());
+      }
+      print(" success..."+ pregnants[i].ocr_seq.toString()+" " +pregnants[i].sow_no.toString());
+      list_ocr_seq.add(pregnants[i].ocr_seq!.toInt());
+      list_sow_no.add(pregnants[i].sow_no!.toString());
     }
   }else{
     print(" fail..."+response.statusCode.toString());
   }
+
+  for( int i=0; i< list_ocr_seq.length; i++){
+    list_add += [[list_ocr_seq[i],list_sow_no[i]]];
+  }
+
+  print(list_add);
+  return list_add;
 }
 
 //선택한 기록 불러오기
-//사용자 아이디, 모돈 번호를 보내고 그 값을 받아옴
-pregnant_selectrow(int seq) async{
+pregnant_selectrow(int num) async{
   final api ='http://211.107.210.141:3000/api/ocr_pregnantSelectedRow';
   final data = {
-    "ocr_seq": seq, //pk
+    "ocr_seq": num, //pk
   };
   final dio = Dio();
   Response response;
@@ -56,9 +59,11 @@ pregnant_selectrow(int seq) async{
   }else{
     print(" fail..."+response.statusCode.toString());
   }
+
+  return response.data;
 }
 
-uploadimg_pregnant(File file)async{
+uploadimg_pregnant(File file) async{
   // final api = 'http://172.17.53.63:3000/api/ocrImageUpload';
   final api ='http://211.107.210.141:3000/api/ocrImageUpload';
   final dio = Dio();
@@ -77,7 +82,7 @@ uploadimg_pregnant(File file)async{
       api,
       data:_formData
   );
-  return response.data;
+  //return response.data;
 }
 
 uploadimg_maternity(File file)async{

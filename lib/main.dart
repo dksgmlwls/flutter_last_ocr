@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get_rx/get_rx.dart';
 import 'package:last_ocr/entities/Ocr_pregnant.dart';
 import 'package:last_ocr/functions/functions.dart';
-import 'package:last_ocr/page/Maternity_list_page.dart';
 import 'package:last_ocr/page/Pregnant_list_page.dart';
 import 'package:last_ocr/page/maternity_graph_page.dart';
 import 'package:last_ocr/page/maternity_page.dart';
@@ -70,9 +69,13 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: const Text('OCR')
                       ),
                       OutlinedButton(
-                          onPressed: (){
+                          onPressed: () async {
+
+                             List<dynamic> list = await pregnant_getocr();
                             //화면전환
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => PregnantListPage([])));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => PregnantListPage((list))));
+                            //서버로부터 값 받아오기
+                           // pregnant_getocr();
                           },
                           child: const Text('기록')
                       ),
@@ -103,12 +106,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       OutlinedButton(
                           onPressed: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => MaternitytListPage([])));
+                            // Navigator.push(context, MaterialPageRoute(
+                            //     builder: (context) => PregnantListPage()));
                           },
                           child: const Text('기록')
                       ),
                       OutlinedButton(
                           onPressed: () {
+
                             Navigator.push(context, MaterialPageRoute(
                                 builder: (context) => MaternityGraphPage()));
                           },

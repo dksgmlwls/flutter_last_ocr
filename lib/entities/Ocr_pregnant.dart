@@ -1,7 +1,7 @@
 class Ocr_pregnant {
-  String? ocr_seq;
+  int? ocr_seq;
   String? sow_no;
-  String? sow_hang;
+  int? sow_hang;
   String? sow_birth;
   String? sow_buy;
   String? sow_estrus;

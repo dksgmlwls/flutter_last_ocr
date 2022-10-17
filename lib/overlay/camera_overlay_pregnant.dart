@@ -157,6 +157,8 @@ class CameraOverlayPregnantState extends State<CameraOverlayPregnant> {
                                   onPressed: () async {
                                     final croppedfile = await cropImage(file.path);
                                     List list = await uploadimg_pregnant(File(croppedfile.path));
+                                    print("카메라 오버레이 ");
+                                    print(list.runtimeType);
 
                                     GallerySaver.saveImage(croppedfile.path)
                                         .then((value) => print('>>>> save value= $value'))
@@ -191,10 +193,10 @@ class CameraOverlayPregnantState extends State<CameraOverlayPregnant> {
                                         )),
 
                                   ),
-                                )));
+                                )
+                            )
+                        );
                       },
-
-
                     ),
                     info:
                     '박스에 맞춰 사진찍어주세요');

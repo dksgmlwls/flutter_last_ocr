@@ -197,7 +197,7 @@ class MaternityModifyPageState extends State<MaternityModifyPage>{
     }
     return Scaffold(
         appBar: AppBar(
-          title: Text("분만사"),
+          title: Text("분만사 수정하기"),
         ),
         body: SingleChildScrollView(
 
